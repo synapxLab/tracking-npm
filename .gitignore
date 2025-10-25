@@ -6,7 +6,6 @@ pnpm-lock.yaml
 temps/
 
 # Build outputs
-dist/
 *.tsbuildinfo
 
 # Logs
