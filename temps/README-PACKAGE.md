@@ -16,37 +16,20 @@ Lightweight NPM package usage tracker with minimal performance impact.
 
 ## 📦 Installation
 
-### 1️⃣ Obtenir votre clé d'authentification
-
-1. Connectez-vous sur **https://synapx.fr/OAuth/** via GitHub (gratuit & rapide)
-2. Dans la section **"Tracking NPM"**, ajoutez le nom de votre package npm
-3. Copiez le code JS généré avec votre clé d'authentification
-
-### 2️⃣ Installer le package
-
 ```bash
 npm install @synapxlab/tracking-npm
 ```
 
-### 3️⃣ Ajouter à votre librairie
+## 🚀 Quick Start
 
 ```javascript
 import { trackingnpm } from '@synapxlab/tracking-npm';
 
-// Configurez avec votre clé générée sur synapx.fr
 trackingnpm.init({
-  package_key: 'VOTRE_CLE_64_CARACTERES_ICI',
+  package_key: 'your-64-char-hex-key',
   version: '1.0.0'
 });
 ```
-
-## 🔑 Getting Your Package Key
-
-1. Visit [Synapx OAuth](https://synapx.fr/OAuth/) and connect via GitHub (free & quick)
-2. In the **"Tracking NPM"** section, add your npm package name
-3. Copy the generated JS code with your authentication key (64 characters)
-
-**Important**: This key is unique to your package and allows tracking statistics on your dashboard.
 
 ## 📖 Usage Examples
 
@@ -104,21 +87,10 @@ function MyApp({ Component, pageProps }) {
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `package_key` | `string` | `null` | Your 64-character tracking key (get it on [synapx.fr/OAuth](https://synapx.fr/OAuth/)) |
+| `package_key` | `string` | `null` | Your 64-character tracking key |
 | `version` | `string` | `null` | Your package version |
 | `DELAY_MS` | `number` | `10000` | Delay before execution (ms) |
 | `CHANCE` | `number` | `0.01` | Execution probability (0.01 = 1%) |
-
-### Advanced Configuration
-
-```javascript
-trackingnpm.init({
-  package_key: 'your-64-char-key',
-  version: '1.0.0',
-  DELAY_MS: 15000,  // Wait 15 seconds instead of 10
-  CHANCE: 0.05      // 5% probability instead of 1%
-});
-```
 
 ## 🎯 How It Works
 
