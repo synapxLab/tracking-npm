@@ -2,13 +2,14 @@
  * 🛰️ @synapxlab/tracking-npm
  * 
  * Lightweight NPM package usage tracker
+ * - 1 call max per library (by package_key)
+ * - Waits for DOMContentLoaded
  * - Waits 10s before execution
  * - Executes at idle (or after 1s fallback)
  * - 1% execution probability (configurable)
  * 
  * @see https://synapx.fr/sdk/Tracking_NPM/
  */
-
 export interface TrackingConfig {
   version?: string | null;
   package_key?: string | null;
@@ -23,6 +24,13 @@ interface InternalConfig {
   CHANCE: number;
 }
 
+// 🔒 Registre global des package_key déjà initialisés
+declare global {
+  interface Window {
+    __TRACKING_NPM_REGISTRY__?: Set<string>;
+  }
+}
+
 export const trackingnpm = (() => {
   const npm_config: InternalConfig = {
     version: null,
@@ -33,6 +41,20 @@ export const trackingnpm = (() => {
 
   const ctrl = new AbortController();
   const signal = ctrl.signal;
+  let pendingTimeout: number | null = null;
+
+  /**
+   * Get or create the global registry
+   */
+  const getRegistry = (): Set<string> => {
+    if (typeof window !== 'undefined') {
+      if (!window.__TRACKING_NPM_REGISTRY__) {
+        window.__TRACKING_NPM_REGISTRY__ = new Set();
+      }
+      return window.__TRACKING_NPM_REGISTRY__;
+    }
+    return new Set();
+  };
 
   /**
    * Compare two semantic versions
@@ -93,7 +115,37 @@ export const trackingnpm = (() => {
         npm_config.CHANCE = conf.CHANCE;
       }
 
-      setTimeout(run, npm_config.DELAY_MS);
+      // 🔒 Vérifier si ce package_key a déjà été initialisé (1 appel max par librairie)
+      const registry = getRegistry();
+      const packageKey = npm_config.package_key;
+
+      if (packageKey && registry.has(packageKey)) {
+        // Ce package_key a déjà été initialisé, ignorer silencieusement
+        return;
+      }
+
+      // ✅ Enregistrer ce package_key
+      if (packageKey) {
+        registry.add(packageKey);
+      }
+
+      // 🔒 Attendre DOMContentLoaded avant d'exécuter
+      const startTracking = () => {
+        pendingTimeout = setTimeout(run, npm_config.DELAY_MS) as unknown as number;
+      };
+
+      if (typeof document !== 'undefined') {
+        if (document.readyState === 'loading') {
+          // DOM pas encore chargé, attendre l'événement
+          document.addEventListener('DOMContentLoaded', startTracking, { once: true });
+        } else {
+          // DOM déjà chargé, exécuter immédiatement
+          startTracking();
+        }
+      } else {
+        // Environnement Node.js, exécuter directement
+        startTracking();
+      }
     },
 
     /**
@@ -101,6 +153,19 @@ export const trackingnpm = (() => {
      */
     abort(): void {
       ctrl.abort();
+      if (pendingTimeout !== null) {
+        clearTimeout(pendingTimeout);
+        pendingTimeout = null;
+      }
+
+      // Retirer du registre
+      const registry = getRegistry();
+      const packageKey = npm_config.package_key;
+      if (packageKey) {
+        registry.delete(packageKey);
+      }
     }
   };
 })();
+
+export default trackingnpm;

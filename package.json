@@ -1,17 +1,26 @@
 {
   "name": "@synapxlab/tracking-npm",
-  "publishConfig": {
-    "access": "public"
-  },
+  "version": "1.0.0",
   "description": "🛰️ Lightweight NPM package usage tracker - Tracks package usage with minimal performance impact (10s delay, idle execution, 1% sampling)",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "sideEffects": false,
   "files": [
     "dist",
     "README.md",
     "LICENSE"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
@@ -46,6 +55,5 @@
   },
   "engines": {
     "node": ">=14"
-  },
-  "version": "1.0.0"
+  }
 }
