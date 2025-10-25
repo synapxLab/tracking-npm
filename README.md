@@ -20,7 +20,7 @@ Vous publiez sur NPM. Vous avez des statistiques de téléchargements, mais **vo
 - 🤷 **Qui utilise réellement votre package en production ?**
 - 🌐 **Sur quels sites web il tourne ?**
 - 📊 **Quelles versions sont déployées sur le terrain ?**
-- ⚠️ **Combien de sites utilisent des versions obsolètes ?**
+- ⚠️ **Combien de sites et qui utilisent des versions obsolètes ?**
 
 > **Les statistiques NPM ne montrent que les téléchargements, pas l'usage réel !**  
 > Un `npm install` ne signifie pas que le code tourne en production. Les CI/CD, bots et installations de développement gonflent artificiellement les chiffres.
@@ -43,17 +43,19 @@ Vous publiez sur NPM. Vous avez des statistiques de téléchargements, mais **vo
 - Dashboard centralisé de toutes les installations
 - Détection automatique des versions obsolètes
 
-#### 🎯 Gestion intelligente
-- Notifications email automatiques sur nouveau domaine
-- Alertes dans la console développeur
-- Blocage conditionnel de fonctionnalités
-- Adaptation comportementale du code
-
 ---
 
 ## 🚀 Installation rapide
 
 ### 1️⃣ Installer le package
+
+connectez vous sur https://synapx.fr/OAuth/  via  GitHub — c'est gratuit & rapide
+
+dans " Tracking NPM " ajouter le nom de package npm
+cela génére le Code JS 
+avec votre la key d'autantification ... 
+
+
 
 ```bash
 npm install @synapxlab/tracking-npm
@@ -62,13 +64,13 @@ npm install @synapxlab/tracking-npm
 ### 2️⃣ Ajouter à votre librairie
 
 ```javascript
-import '@synapxlab/tracking-npm/version-checker.js';
+import { trackingnpm } from '@synapxlab/tracking-npm';
 
 // Configurez pour votre package
-if (window.TrackingNPM) {
-  window.TrackingNPM.version = '2.4.0';
-  window.TrackingNPM.npm = '@votre-scope/votre-package';
-}
+trackingnpm.init({
+  version: '2.1.3', 
+  package_key: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+});
 ```
 
 ### 3️⃣ C'est tout !

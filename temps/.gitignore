@@ -30,7 +30,7 @@ Thumbs.db
 # Testing
 coverage/
 .nyc_output/
-temps/
+
 # Environment
 .env
 .env.local
