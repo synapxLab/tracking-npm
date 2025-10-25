@@ -3,7 +3,7 @@ node_modules/
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
-
+temps/
 # Build outputs
 dist/
 *.tsbuildinfo
