@@ -1,0 +1,32 @@
+# Source files
+src/
+*.ts
+!*.d.ts
+
+# Config files
+tsconfig.json
+rollup.config.js
+.eslintrc*
+.prettierrc*
+
+# Development files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing
+coverage/
+.nyc_output/
+*.test.js
+*.spec.js
+
+# Git
+.git/
+.gitignore
+.github/
+
+# Misc
+*.log
+*.tgz
+node_modules/
