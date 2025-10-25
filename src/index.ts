@@ -104,6 +104,3 @@ export const trackingnpm = (() => {
     }
   };
 })();
-
-// Export for convenience
-export default trackingnpm;
