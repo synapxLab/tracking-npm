@@ -1,3 +1,4 @@
+
 # 🛰️ @synapxlab/tracking-npm
 
 [![npm version](https://img.shields.io/npm/v/@synapxlab/tracking-npm.svg)](https://www.npmjs.com/package/@synapxlab/tracking-npm) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -16,6 +17,7 @@ Complete list of **domains** using your package.
 ### 2️⃣ JS code and installation key available to copy/paste
 
 ```bash
+npm install --save-dev typescript @types/node
 npm install @synapxlab/tracking-npm
 ```
 
@@ -23,7 +25,7 @@ npm install @synapxlab/tracking-npm
 
 Example output:
 
-```javascript
+```typescript
 import { trackingnpm } from '@synapxlab/tracking-npm';
 
 trackingnpm.init({
@@ -34,7 +36,7 @@ trackingnpm.init({
 
 ### Advanced configuration
 
-```javascript
+```typescript
 trackingnpm.init({
   package_key: 'your-64-char-key',
   version: '1.0.0',
@@ -90,6 +92,38 @@ anonymous statistics about `your package name`.
 3. View your package statistics:
    - 📈 Number of installations
    - 🌍 Domains using your package and the production version
+
+
+### 📦 Download
+File name : `PakageName.json`
+```json
+{
+  "package": "@synapxlab/cookie-consent",
+  "sk_live": "8c0cf425d8bf3a7a5591d41916ba4357bf5f48d6ea5fe9e5e5c6ab98eb7cec7c",
+  "total_hosts": 2,
+  "hosts": [
+    {
+      "host": "example.com",
+      "version": "2.1.3",
+      "last_ping": "2025-10-27 09:12:00",
+      "total_pings": 5
+    },
+    {
+      "host": "another-site.fr",
+      "version": "2.1.3",
+      "last_ping": "2025-10-27 09:12:00",
+      "total_pings": 15
+    }
+  ]
+}
+
+```
+
+>    The fields last_ping and total_pings are essential for intelligently adjusting the ping frequency on the client side (scale, delay, etc.).   L’objectif est d’obtenir une configuration stable avec environ 
+>   The goal is to achieve a stable configuration with about one ping per week per domain — enough to ensure reliable statistics without creating unnecessary load.
+> 
+> ⏳ Data is automatically **deleted after 90 days** to comply with data minimization principles and GDPR requirements.
+
 
 ## ❓ FAQ
 

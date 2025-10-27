@@ -1,3 +1,4 @@
+
 # 🛰️ @synapxlab/tracking-npm
 
 [![npm version](https://img.shields.io/npm/v/@synapxlab/tracking-npm.svg)](https://www.npmjs.com/package/@synapxlab/tracking-npm) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -16,6 +17,7 @@ Liste complète des **domaines** qui utilisent votre package.
 ### 2️⃣ Le code JS et la clef d'installation dispo en copier/coller
 
 ```bash
+npm install --save-dev typescript @types/node
 npm install @synapxlab/tracking-npm
 ```
 
@@ -23,7 +25,7 @@ npm install @synapxlab/tracking-npm
 
 Exemple de sortie :
 
-```javascript
+```typescript
 import { trackingnpm } from '@synapxlab/tracking-npm';
 
 trackingnpm.init({
@@ -34,7 +36,7 @@ trackingnpm.init({
 
 ### Configuration avancée
 
-```javascript
+```typescript
 trackingnpm.init({
   package_key: 'votre-clé-64-caractères',
   version: '1.0.0',
@@ -82,6 +84,39 @@ statistiques anonymes sur `le nom de votre package`.
 - ✅ Open source
 - ✅ Collecte minimale de données
 - ✅ Respecte la vie privée des utilisateurs
+
+
+## 📦 Download
+Nom de fichier : `PakageName.json`
+```json
+{
+  "package": "@synapxlab/cookie-consent",
+  "sk_live": "8c0cf425d8bf3a7a5591d41916ba4357bf5f48d6ea5fe9e5e5c6ab98eb7cec7c",
+  "total_hosts": 2,
+  "hosts": [
+    {
+      "host": "example.com",
+      "version": "2.1.3",
+      "last_ping": "2025-10-27 09:12:00",
+      "total_pings": 5
+    },
+    {
+      "host": "autre-site.fr",
+      "version": "2.1.3",
+      "last_ping": "2025-10-27 09:12:00",
+      "total_pings": 15
+    }
+  ]
+}
+
+```
+
+>    Les champs  `last_ping`  et  `total_pings`  sont essentiels pour ajuster intelligemment la fréquence de ping côté client (`scale`,  `delay`, etc.).   L’objectif est d’obtenir une configuration stable avec environ 
+>     **1 ping par semaine et par domaine**  — suffisant pour garantir des statistiques fiables sans générer de surcharge inutile.
+> 
+> **⏳ Les données sont automatiquement supprimées après 90 jours** afin de respecter les principes de minimisation et de conformité RGPD.
+
+
 
 ## 📊 Voir vos statistiques
 
