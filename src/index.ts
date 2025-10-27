@@ -28,7 +28,7 @@ export const trackingnpm = (() => {
   let pendingTimeout: ReturnType<typeof setTimeout> | null = null;
   let idleHandle: number | null = null;
 
-  const clamp = (v: number, min = 0, max = 1) => Math.min(max, Math.max(min, v));
+  const clamp = (v: number, min = 0, max = 1): number => Math.min(max, Math.max(min, v));
 
   const getRegistry = (): Set<string> => {
     if (typeof window !== 'undefined') {
@@ -38,23 +38,13 @@ export const trackingnpm = (() => {
     return new Set<string>();
   };
 
-  const send = () => {
-    // FIX: Inverser la logique - si random >= CHANCE, on skip
-    if (Math.random() >= npm_config.CHANCE) return;
+  const send = (): void => {
+    // Si random > CHANCE, on skip (ex: CHANCE=1 → toujours envoyer, CHANCE=0.01 → 1% d'envoi)
+    if (Math.random() > npm_config.CHANCE) return;
     if (!npm_config.package_key) return;
 
     const url = 'https://npm.synapx.fr';
     const payload = JSON.stringify(npm_config);
-
-    if (typeof navigator !== 'undefined' && 'sendBeacon' in navigator) {
-      try {
-        const blob = new Blob([payload], { type: 'application/json' });
-        navigator.sendBeacon(url, blob);
-        return;
-      } catch {
-        /* ignore */
-      }
-    }
 
     fetch(url, {
       method: 'POST',
@@ -66,7 +56,7 @@ export const trackingnpm = (() => {
     });
   };
 
-  const run = () => {
+  const run = (): void => {
     const executeTracking = () => send();
 
     const ric = (window as any).requestIdleCallback as
@@ -83,6 +73,7 @@ export const trackingnpm = (() => {
   return {
     /**
      * Initialise le tracking.
+     * @param conf - Configuration
      */
     init(conf: TrackingConfig = {}): void {
       if (typeof conf !== 'object') return;
@@ -97,7 +88,6 @@ export const trackingnpm = (() => {
       if (typeof conf.CHANCE === 'number') {
         npm_config.CHANCE = clamp(conf.CHANCE);
       }
-
       const registry = getRegistry();
       const packageKey = npm_config.package_key;
 
