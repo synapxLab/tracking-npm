@@ -86,7 +86,19 @@ statistiques anonymes sur `le nom de votre package`.
 - ✅ Respecte la vie privée des utilisateurs
 
 
-## 📦 Download
+
+
+
+## 📊 Voir vos statistiques
+
+1. Connectez-vous sur **https://synapx.fr**
+2. Accédez à votre dashboard
+3. Consultez les statistiques de vos packages :
+   - 📈 Nombre d'installations
+   - 🌍 Domaines utilisant votre package et la version en production
+
+
+### 📦 Download
 Nom de fichier : `PakageName.json`
 ```json
 {
@@ -118,13 +130,6 @@ Nom de fichier : `PakageName.json`
 
 
 
-## 📊 Voir vos statistiques
-
-1. Connectez-vous sur **https://synapx.fr**
-2. Accédez à votre dashboard
-3. Consultez les statistiques de vos packages :
-   - 📈 Nombre d'installations
-   - 🌍 Domaines utilisant votre package et la version en production
 
 ## ❓ FAQ
 

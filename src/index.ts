@@ -39,7 +39,8 @@ export const trackingnpm = (() => {
   };
 
   const send = () => {
-    if (Math.random() > npm_config.CHANCE) return;
+    // FIX: Inverser la logique - si random >= CHANCE, on skip
+    if (Math.random() >= npm_config.CHANCE) return;
     if (!npm_config.package_key) return;
 
     const url = 'https://npm.synapx.fr';
