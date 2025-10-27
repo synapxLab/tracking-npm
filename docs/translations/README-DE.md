@@ -91,6 +91,36 @@ anonymer Statistiken über `Ihr Paketname`.
    - 📈 Anzahl der Installationen
    - 🌍 Domains, die Ihr Paket verwenden, und die Produktionsversion
 
+
+### 📦 Download
+File name : `PakageName.json`
+```json
+{
+  "package": "@synapxlab/cookie-consent",
+  "sk_live": "8c0cf425d8bf3a7a5591d41916ba4357bf5f48d6ea5fe9e5e5c6ab98eb7cec7c",
+  "total_hosts": 2,
+  "hosts": [
+    {
+      "host": "example.com",
+      "version": "2.1.3",
+      "last_ping": "2025-10-27 09:12:00",
+      "total_pings": 5
+    },
+    {
+      "host": "another-site.fr",
+      "version": "2.1.3",
+      "last_ping": "2025-10-27 09:12:00",
+      "total_pings": 15
+    }
+  ]
+}
+
+```
+>    Die Felder last_ping und total_pings sind entscheidend, um die Ping-Frequenz auf der Client-Seite intelligent anzupassen (Skalierung, Verzögerung usw.). 
+>   Ziel ist eine stabile Konfiguration mit etwa einem Ping pro Woche und Domain – ausreichend für zuverlässige Statistiken, ohne unnötige Last zu erzeugen.
+> 
+> ⏳ Daten werden automatisch nach 90 Tagen gelöscht, um dem Grundsatz der Datenminimierung und den Anforderungen der DSGVO zu entsprechen.
+
 ## ❓ FAQ
 
 ### Verlangsamt das Tracking meine Anwendung?

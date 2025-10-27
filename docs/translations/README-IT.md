@@ -91,6 +91,35 @@ statistiche anonime su `il nome del tuo pacchetto`.
    - 📈 Numero di installazioni
    - 🌍 Domini che utilizzano il tuo pacchetto e la versione in produzione
 
+### 📦 Download
+File name : `PakageName.json`
+```json
+{
+  "package": "@synapxlab/cookie-consent",
+  "sk_live": "8c0cf425d8bf3a7a5591d41916ba4357bf5f48d6ea5fe9e5e5c6ab98eb7cec7c",
+  "total_hosts": 2,
+  "hosts": [
+    {
+      "host": "example.com",
+      "version": "2.1.3",
+      "last_ping": "2025-10-27 09:12:00",
+      "total_pings": 5
+    },
+    {
+      "host": "another-site.fr",
+      "version": "2.1.3",
+      "last_ping": "2025-10-27 09:12:00",
+      "total_pings": 15
+    }
+  ]
+}
+
+```
+>    I campi last_ping e total_pings sono fondamentali per regolare in modo intelligente la frequenza dei ping lato client (scalabilità, ritardo, ecc.).
+>   L’obiettivo è ottenere una configurazione stabile con circa un ping a settimana per dominio, sufficiente per garantire statistiche affidabili senza creare carico inutile.
+> 
+> ⏳ I dati vengono eliminati automaticamente dopo 90 giorni per rispettare i principi di minimizzazione dei dati e i requisiti del GDPR.
+
 ## ❓ FAQ
 
 ### Il tracking rallenta la mia applicazione?
